@@ -4,6 +4,9 @@ const { createServer } = require('http');
 
 const db = require('../database/config');
 
+// Importar modelos
+require('../models/Usuarios');
+
 class Server {
 
     constructor() {
@@ -12,7 +15,8 @@ class Server {
         this.server = createServer( this.app );
 
         this.paths = {
-            inicio: '/api/inicio'
+            inicio: '/api/inicio',
+            usuarios: '/api/usuarios'
         }
 
         // Conectar DB
@@ -42,6 +46,7 @@ class Server {
 
     routes() {
         this.app.use( this.paths.inicio, require('../routes/inicio') );
+        this.app.use( this.paths.usuarios, require('../routes/usuarios'));
     }
 
     listen() {
