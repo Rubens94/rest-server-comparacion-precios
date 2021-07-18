@@ -2,7 +2,10 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const {
-    crearUsuario
+    crearUsuario,
+    mostrarUsuarios,
+    actualizarUsuario,
+    eliminarUsuario
 } = require('../controllers/usuarios');
 
 const {
@@ -11,6 +14,7 @@ const {
 
 const router = Router();
 
+// Crear usuario
 router.post('/',[
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('apellidos', 'Los apellidos son obligatorios').not().isEmpty(),
@@ -21,5 +25,14 @@ router.post('/',[
     check('confirmar', 'La confirmación del password es obligatorio').not().isEmpty(),
     validarRegistro
 ],  crearUsuario);
+
+// Mostrar usuarios
+router.get('/', mostrarUsuarios);
+
+// Actualizar usuario por id
+router.put('/:id', actualizarUsuario);
+
+// Eliminar usuario por ID
+router.delete('/:id', eliminarUsuario);
 
 module.exports = router;
