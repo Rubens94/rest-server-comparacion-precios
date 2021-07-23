@@ -16,7 +16,8 @@ class Server {
 
         this.paths = {
             inicio: '/api/inicio',
-            usuarios: '/api/usuarios'
+            usuarios: '/api/usuarios',
+            productos: '/api/productos'
         }
 
         // Conectar DB
@@ -47,6 +48,7 @@ class Server {
     routes() {
         this.app.use( this.paths.inicio, require('../routes/inicio') );
         this.app.use( this.paths.usuarios, require('../routes/usuarios'));
+        this.app.use( this.paths.productos, require('../routes/productos' ));
     }
 
     listen() {

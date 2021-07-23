@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../database/config');
 const bcrypt = require('bcrypt-nodejs');
+const Productos = require('./Productos');
 
 const Usuarios = db.define('usuarios', {
     id: {
@@ -81,5 +82,7 @@ const Usuarios = db.define('usuarios', {
 Usuarios.prototype.verificarPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 }
+
+Usuarios.hasMany( Productos ); // Los usuarios pueden crear varios productos
 
 module.exports = Usuarios;
